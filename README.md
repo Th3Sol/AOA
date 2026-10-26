@@ -5,15 +5,16 @@
 
 1. [Insertion Sort](#1a-insertion-sort)
 2. [Selection Sort](#1b-selection-sort)
-3. [Binary Search](#2-binary-search)
-4. [Minimum and Maximum using Divide and Conquer](#3-minimum-and-maximum-using-divide-and-conquer)
-5. [Quick Sort](#4-quick-sort)
-6. [Prim's Algorithm (MST)](#5-prims-algorithm-minimum-spanning-tree-mst)
-7. [0/1 Knapsack using Dynamic Programming](#6-01-knapsack-using-dynamic-programming)
-8. [Floyd-Warshall Algorithm](#7-floyd-warshall-algorithm)
-9. [N-Queen using Backtracking](#8-n-queen-problem-using-backtracking)
-10. [Job Sequencing with Deadlines](#9-job-sequencing-with-deadlines-greedy)
-11. [Rabin-Karp String Matching](#10-rabin-karp-string-matching)
+3. [Insertion and Selection Sort](#1c-insertion-sort-and-selection-sort-in-one-program)
+4. [Binary Search](#2-binary-search)
+5. [Minimum and Maximum using Divide and Conquer](#3-minimum-and-maximum-using-divide-and-conquer)
+6. [Quick Sort](#4-quick-sort)
+7. [Prim's Algorithm (MST)](#5-prims-algorithm-minimum-spanning-tree-mst)
+8. [0/1 Knapsack using Dynamic Programming](#6-01-knapsack-using-dynamic-programming)
+9. [Floyd-Warshall Algorithm](#7-floyd-warshall-algorithm)
+10. [N-Queen using Backtracking](#8-n-queen-problem-using-backtracking)
+11. [Job Sequencing with Deadlines](#9-job-sequencing-with-deadlines-greedy)
+12. [Rabin-Karp String Matching](#10-rabin-karp-string-matching)
 
 ---
 
@@ -87,6 +88,75 @@ void main()
         temp = a[i];
         a[i] = a[min];
         a[min] = temp;
+    }
+
+    printf("Sorted array: ");
+    for(i = 0; i < n; i++)
+        printf("%d ", a[i]);
+
+    getch();
+}
+```
+### 1(c). Insertion Sort and Selection Sort in One Program
+
+```c
+#include <stdio.h>
+#include <conio.h>
+
+void main()
+{
+    int a[50], n, i, j, key, min, temp, choice;
+    clrscr();
+
+    printf("1. Insertion Sort\n");
+    printf("2. Selection Sort\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    if(choice != 1 && choice != 2)
+    {
+        printf("Invalid choice");
+        getch();
+        return;
+    }
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter elements:\n");
+    for(i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    if(choice == 1)
+    {
+        for(i = 1; i < n; i++)
+        {
+            key = a[i];
+            j = i - 1;
+
+            while(j >= 0 && a[j] > key)
+            {
+                a[j + 1] = a[j];
+                j--;
+            }
+
+            a[j + 1] = key;
+        }
+    }
+    else
+    {
+        for(i = 0; i < n - 1; i++)
+        {
+            min = i;
+
+            for(j = i + 1; j < n; j++)
+                if(a[j] < a[min])
+                    min = j;
+
+            temp = a[i];
+            a[i] = a[min];
+            a[min] = temp;
+        }
     }
 
     printf("Sorted array: ");
